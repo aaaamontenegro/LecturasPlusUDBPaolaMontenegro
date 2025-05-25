@@ -37,28 +37,17 @@ Aplicación web desarrollada con ASP.NET Core MVC y SQL Server que permite explo
 
 Ejecutar el proyecto con Ctrl + F5 o presionar el botón de "Iniciar".
 
-✨ Funcionalidades principales
-📖 Catálogo paginado de libros (5 por página).
+## ✨ Funcionalidades principales
 
-🔍 Búsqueda por título y género.
+- 📖 **Catálogo paginado** de libros (5 por página).
+- 🔍 **Búsqueda** por título y género.
+- ⭐ **Calificación** de 1 a 5 estrellas sin necesidad de iniciar sesión.
+- 🥇 **Ranking** de los 5 libros mejor valorados.
+- ✏️ **CRUD completo**: crear, editar, eliminar libros.
 
-⭐ Calificación de 1 a 5 estrellas sin necesidad de iniciar sesión.
+---
 
-🥇 Ranking de los 5 libros mejor valorados.
 
-✏️ CRUD completo: crear, editar, eliminar libros.
-
-📁 Estructura destacada
-Controllers/ → Lógica del sistema.
-
-Views/ → Interfaces del usuario (Explorar, Ranking, CRUD).
-
-Models/ → Estructura de datos.
-
-Database/ → Script SQL necesario para crear la base de datos.
-
-✅ Estado del proyecto
-✔️ Listo para pruebas locales y evaluación académica.
 
 Creado por:
 Andrea Paola Montenegro Paz – MP101106
