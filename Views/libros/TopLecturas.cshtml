@@ -1,0 +1,40 @@
+﻿@model List<Biblioteca_Digital_Interactiva___Lectura_.Models.ViewModels.TopLibroViewModel>
+
+@{
+    ViewData["Title"] = "Top Lecturas";
+}
+
+<h2 class="text-center my-4">🏆 Top 5 Libros Mejor Calificados</h2>
+
+<div class="container">
+    <table class="table table-striped text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Género</th>
+                <th scope="col">Promedio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var medalla = item.Posicion switch
+                {
+                    1 => "🥇",
+                    2 => "🥈",
+                    3 => "🥉",
+                    _ => "⭐"
+                };
+                <tr>
+                    <th scope="row">@medalla</th>
+                    <td>@item.Libro.Titulo</td>
+                    <td>@item.Libro.Autor</td>
+                    <td>@item.Libro.Genero</td>
+                    <td>@item.Promedio.ToString("0.0") ★</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

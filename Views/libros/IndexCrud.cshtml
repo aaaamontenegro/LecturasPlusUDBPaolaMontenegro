@@ -1,0 +1,46 @@
+﻿@model List<Biblioteca_Digital_Interactiva___Lectura_.Models.Libro>
+
+@{
+    ViewData["Title"] = "Gestionar Libros";
+}
+
+<h2 class="text-center my-4">📚 Gestión de Libros</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger text-center">@TempData["Error"]</div>
+}
+
+<div class="container mb-3 text-end">
+    <a asp-action="Create" class="btn btn-success">➕ Agregar Libro</a>
+</div>
+
+<table class="table table-bordered table-hover text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Título</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>@libro.Titulo</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@libro.IdLibro" class="btn btn-warning btn-sm">✏️ Editar</a>
+
+                    <form asp-action="DeleteConfirmed" method="post" asp-route-id="@libro.IdLibro"
+                          style="display:inline;" onsubmit="return confirm('¿Estás segura de eliminar este libro?');">
+                        <input type="hidden" name="id" value="@libro.IdLibro" />
+                        <button type="submit" class="btn btn-danger btn-sm">🗑️ Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

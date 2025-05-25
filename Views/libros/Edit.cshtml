@@ -1,0 +1,47 @@
+﻿@model Biblioteca_Digital_Interactiva___Lectura_.Models.Libro
+
+@{
+    ViewData["Title"] = "Editar Libro";
+}
+
+<h2 class="text-center my-4">✏️ Editar Libro</h2>
+
+<div class="container">
+    <form asp-action="Edit" method="post" class="row g-3">
+        <input type="hidden" asp-for="IdLibro" />
+
+        <div class="col-md-6">
+            <label asp-for="Titulo" class="form-label">Título</label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Autor" class="form-label">Autor</label>
+            <input asp-for="Autor" class="form-control" />
+            <span asp-validation-for="Autor" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Genero" class="form-label">Género</label>
+            <input asp-for="Genero" class="form-control" />
+            <span asp-validation-for="Genero" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Portada_Url" class="form-label">URL de Portada</label>
+            <input asp-for="Portada_Url" class="form-control" />
+            <span asp-validation-for="Portada_Url" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Sinopsis" class="form-label">Sinopsis</label>
+            <textarea asp-for="Sinopsis" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Sinopsis" class="text-danger"></span>
+        </div>
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a asp-action="IndexCrud" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

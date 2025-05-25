@@ -1,0 +1,48 @@
+﻿## Compilación y salida
+bin/
+obj/
+out/
+
+## Archivos de configuración de Visual Studio
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## ASP.NET Core
+wwwroot/lib/
+wwwroot/css/output.css
+wwwroot/js/bundle.js
+
+## Configuración local
+appsettings.Development.json
+appsettings.Local.json
+
+## Archivos de log
+*.log
+
+## Entity Framework
+Migrations/
+
+## Archivos de bases de datos locales
+*.db
+*.sqlite
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## Node.js (Tailwind, npm)
+node_modules/
+package-lock.json
+
+## Sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ✅ Permitir archivos .sql explícitamente
+!*.sql

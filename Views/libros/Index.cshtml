@@ -1,0 +1,126 @@
+﻿@model List<Biblioteca_Digital_Interactiva___Lectura_.Models.Libro>
+
+@{
+    ViewData["Title"] = "Explorar Libros";
+}
+
+<h2 class="text-2xl font-bold mb-4 text-center">Explorar Libros</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Index" method="get" class="mb-4 d-flex gap-2">
+    <input type="text" name="buscarTitulo" value="@ViewBag.BuscarTitulo" placeholder="Buscar por título" class="form-control" />
+    <input type="text" name="buscarGenero" value="@ViewBag.BuscarGenero" placeholder="Buscar por género" class="form-control" />
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var libro in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@libro.Portada_Url" class="img-fluid rounded-start h-100 w-100 object-fit-cover" alt="@libro.Titulo" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h5 class="card-title">@libro.Titulo</h5>
+                                    <p class="mb-1 text-muted"><strong>Autor:</strong> @libro.Autor</p>
+                                    <p class="mb-1"><strong>Género:</strong> @libro.Genero</p>
+                                    <p class="card-text text-truncate">@libro.Sinopsis</p>
+                                </div>
+                                <div>
+                                   <form asp-action="Calificar" asp-controller="Calificaciones" method="post" onsubmit="return setPuntuacion(@libro.IdLibro)">
+    <input type="hidden" name="IdLibro" value="@libro.IdLibro" />
+    <input type="hidden" id="puntuacionHidden_@libro.IdLibro" name="Puntuacion" />
+
+    <div class="rating d-flex flex-row-reverse justify-content-start position-relative">
+        @for (int i = 5; i >= 1; i--)
+        {
+            <input type="radio" id="estrella@i-@libro.IdLibro" name="Puntuacion_@libro.IdLibro" value="@i" />
+            <label for="estrella@i-@libro.IdLibro" title="@i estrellas">★</label>
+        }
+    </div>
+    <button type="submit" class="btn btn-sm btn-outline-primary mt-2">Enviar</button>
+</form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- PAGINACIÓN -->
+<div class="mt-4 d-flex justify-content-center gap-2">
+    @for (int i = 1; i <= (int)ViewBag.TotalPaginas; i++)
+    {
+        if (i == ViewBag.PaginaActual)
+        {
+            <span class="btn btn-primary disabled">@i</span>
+        }
+        else
+        {
+            <a asp-action="Index"
+               asp-route-pagina="@i"
+               asp-route-buscarTitulo="@ViewBag.BuscarTitulo"
+               asp-route-buscarGenero="@ViewBag.BuscarGenero"
+               class="btn btn-outline-secondary">@i</a>
+        }
+    }
+</div>
+
+<style>
+    .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        gap: 4px;
+        position: relative;
+    }
+
+    .rating input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .rating label {
+        font-size: 1.5rem;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+        color: gold;
+    }
+</style>
+
+        <script>
+    function setPuntuacion(libroId) {
+        const radios = document.getElementsByName(`Puntuacion_${libroId}`);
+        let puntuacion = 0;
+        for (const radio of radios) {
+            if (radio.checked) {
+                puntuacion = radio.value;
+                break;
+            }
+        }
+        document.getElementById(`puntuacionHidden_${libroId}`).value = puntuacion;
+        return true;
+    }
+</script>
